@@ -7,15 +7,18 @@ from PIL import Image, ImageTk
 window = tk.Tk()  #Makes main window
 window.wm_title("Video feed")
 window.config(background="#FFFFFF")
+window.columnconfigure(0, weight=1)
 
 #Graphics window
 imageFrame = tk.Frame(window, width=600, height=500)
 imageFrame.grid(row=0, column=0, padx=10, pady=2)
+imageFrame.columnconfigure(0, weight=1)
 
 #Capture video frames
 lmain = tk.Label(imageFrame)
 lmain.grid(row=0, column=0)
 cap = cv2.VideoCapture(0)
+
 def show_frame():
     _, frame = cap.read()
     frame = cv2.flip(frame, 1)
@@ -25,8 +28,6 @@ def show_frame():
     lmain.imgtk = imgtk
     lmain.configure(image=imgtk)
     lmain.after(10, show_frame) 
-
-
 
 #Slider window (slider controls stage position)
 sliderFrame = tk.Frame(window, width=600, height=100)
